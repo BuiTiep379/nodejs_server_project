@@ -1,7 +1,9 @@
 const express = require('express');
-const mongoose = require('mongoose');
-require('./services/passport');
 const db = require('./config/db/index');
+require('./models/User');
+require('./services/passport');
+
+
 db.connect();
 
 const app = express();

@@ -1,10 +1,16 @@
 const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
-app.get('/', (req, res) => {
-    res.send({hi : "Hello World"})
-})
+const mongoose = require('mongoose');
+require('./services/passport');
+const db = require('./config/db/index');
+db.connect();
 
-app.listen(port, () =>
-    console.log(`App listening at http://localhost:${port}`)
-);
+const app = express();
+
+require('./routes/authRoutes')(app);
+
+app.get('/', (req, res) =>
+  res.send('Hello World!!')
+)
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`App listen at port: http://localhost:${PORT}`));
